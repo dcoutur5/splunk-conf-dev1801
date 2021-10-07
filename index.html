@@ -1,0 +1,39 @@
+<!-- Define UI Elements here -->
+<!DOCTYPE html>
+
+<html>
+  <body>
+    <label for="splunk_index">Splunk Index:</label>
+
+    <!-- Represents the new index name to be created -->
+    <input type="text" id="splunk_index" />
+
+    <br />
+    <br />
+
+    <input type="button" value="Create Index" onclick="POSTcall()" />
+  </body>
+</html>
+
+<!-- Define Scripts Here -->
+<script>
+  // This function will make a POST request to the backend processor to create
+  // an index.
+  function POSTcall() {
+    // Define the target URL for this POST request
+    var targetURL = "http://localhost:5001/index";
+
+    // Define the payload
+    var data = JSON.stringify({
+      index_name: document.getElementById("splunk_index").value,
+    });
+
+    // Define the request
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", targetURL, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    // Send the request
+    xhr.send(data);
+  }
+</script>
